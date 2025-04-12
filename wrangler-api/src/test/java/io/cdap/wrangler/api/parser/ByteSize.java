@@ -1,45 +1,36 @@
 package io.cdap.wrangler.api.parser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class ByteSize implements Token {
-    private static final Pattern PATTERN = Pattern.compile("(?i)(\\d+(\\.\\d+)?)(B|KB|MB|GB|TB)");
+public class ByteSize extends Token {
     private final long bytes;
 
-    public ByteSize(String value) {
-        Matcher matcher = PATTERN.matcher(value.trim());
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("Invalid byte size format: " + value);
-        }
+    public ByteSize(String text) {
+        super(text);
+        this.bytes = parseByteSize(text);
+    }
 
-        double number = Double.parseDouble(matcher.group(1));
-        String unit = matcher.group(3).toUpperCase();
+    private long parseByteSize(String text) {
+        // Parse the size in bytes (e.g., "10KB" => 10240 bytes)
+        String unit = text.replaceAll("[0-9.]", "").toUpperCase();
+        long value = Long.parseLong(text.replaceAll("[^0-9]", ""));
 
         switch (unit) {
-            case "B":
-                bytes = (long) number;
-                break;
             case "KB":
-                bytes = (long) (number * 1024);
-                break;
+                return value * 1024;
             case "MB":
-                bytes = (long) (number * 1024 * 1024);
-                break;
+                return value * 1024 * 1024;
             case "GB":
-                bytes = (long) (number * 1024 * 1024 * 1024);
-                break;
+                return value * 1024 * 1024 * 1024;
             case "TB":
-                bytes = (long) (number * 1024L * 1024L * 1024L * 1024L);
-                break;
+                return value * 1024 * 1024 * 1024 * 1024;
             default:
-                throw new IllegalArgumentException("Unknown byte size unit: " + unit);
+                return value; // Default is in bytes
         }
     }
 
     public long getBytes() {
         return bytes;
     }
+}
 
     @Override
     public String value() {
