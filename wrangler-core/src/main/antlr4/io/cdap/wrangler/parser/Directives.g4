@@ -144,12 +144,7 @@ numberRange
  : Number ':' Number '=' value
  ;
 
-value
-  : STRING
-  | NUMBER
-  | BYTE_SIZE
-  | TIME_DURATION
-  ;
+value : String | Number | Column | Bool | ByteSize | TimeDuration ;
 
 ecommand
  : '!' Identifier
@@ -319,3 +314,28 @@ fragment Int
 fragment Digit
  : [0-9]
  ;
+fragment DIGITS : [0-9]+ ;
+fragment DECIMAL : DIGITS '.' DIGITS ;
+
+ByteSize
+  : (DECIMAL | DIGITS)(B | KB | MB | GB | TB)
+  ;
+
+TimeDuration
+  : (DECIMAL | DIGITS)(ms | s | sec | seconds | min | minutes | h | hours)
+  ;
+
+fragment B : [bB];
+fragment KB : [kK][bB];
+fragment MB : [mM][bB];
+fragment GB : [gG][bB];
+fragment TB : [tT][bB];
+
+fragment ms : [mM][sS];
+fragment s : [sS];
+fragment sec : [sS][eE][cC];
+fragment seconds : [sS][eE][cC][oO][nN][dD][sS];
+fragment min : [mM][iI][nN];
+fragment minutes : [mM][iI][nN][uU][tT][eE][sS];
+fragment h : [hH];
+fragment hours : [hH][oO][uU][rR][sS];
