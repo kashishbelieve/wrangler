@@ -19,6 +19,11 @@ grammar Directives;
 options {
   language = Java;
 }
+BYTE_SIZE: DIGIT+ ('.' DIGIT+)? BYTE_UNIT;
+TIME_DURATION: DIGIT+ ('.' DIGIT+)? TIME_UNIT;
+
+fragment BYTE_UNIT: [kKmMgGtTpPeE]? [bB];
+fragment TIME_UNIT: 'ms' | 's' | 'sec' | 'm' | 'min' | 'h' | 'd';
 
 @lexer::header {
 /*
@@ -140,8 +145,11 @@ numberRange
  ;
 
 value
- : String | Number | Column | Bool
- ;
+  : STRING
+  | NUMBER
+  | BYTE_SIZE
+  | TIME_DURATION
+  ;
 
 ecommand
  : '!' Identifier
