@@ -1,3 +1,32 @@
+This project extends the Wrangler data wrangling framework by implementing support for parsing and aggregating ByteSize and TimeDuration values via custom grammar, parser logic, and a new directive.
+
+🔧 Features Implemented
+✅ Grammar Enhancements
+Extended Directives.g4 grammar to support ByteSize and TimeDuration tokens.
+
+Supported inputs like "10KB", "1.5MB", "3s", "200ms", etc.
+
+✅ Core Parser Updates
+Handled ByteSize and TimeDuration parsing in ExpressionParser.java.
+
+Created ByteSize and TimeDuration value classes for canonical unit conversion.
+
+✅ New Directive
+Implemented AggregateStats directive (e.g., aggregate-stats :size :time total_size_mb total_time_sec).
+
+Supports aggregation of size and duration fields, with output conversion into human-readable formats.
+
+✅ Unit Testing
+Added tests for:
+
+Parsing ByteSize and TimeDuration.
+
+Running full directive pipelines with sample rows.
+
+Validating aggregation correctness.
+
+
+
 # Data Prep
 
 ![cm-available](https://cdap-users.herokuapp.com/assets/cm-available.svg)
