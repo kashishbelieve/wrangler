@@ -1,0 +1,29 @@
+Prompt 1:
+Where should I create a new directive class for Zeotap Wrangler assignment?
+
+Prompt 2:
+How to write a parser rule for ByteSize in ANTLR (Directives.g4)?
+
+Prompt 3:
+How to update ExpressionParser.java to support ByteSize and TimeDuration?
+
+Prompt 4:
+How to implement an aggregate directive that accumulates ByteSize and TimeDuration values row-wise in Java?
+
+Prompt 5:
+Where to register a new directive class in Wrangler framework?
+
+Prompt 6:
+How to write unit tests for ByteSize and TimeDuration classes with inputs like "10kb", "1.5MB", "5ms", "2.1s"?
+
+Prompt 7:
+How to write parser tests to validate new tokens are parsed correctly and invalid values are rejected?
+
+Prompt 8:
+How to test a directive using TestingRig.execute in Wrangler?
+
+Prompt 9:
+How to ensure successful build and test output for submission?
+
+Prompt 10:
+How to convert accumulated bytes to MB (1000*1000) and nanoseconds to seconds?
