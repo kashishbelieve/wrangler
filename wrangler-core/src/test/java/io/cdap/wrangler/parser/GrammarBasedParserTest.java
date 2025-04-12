@@ -32,6 +32,16 @@ import java.util.List;
 public class GrammarBasedParserTest {
 
   @Test
+public void testRecipeParsing() throws Exception {
+    String[] recipe = {
+        "aggregate-stats :data_size :time total_size_mb total_time_sec"
+    };
+    RecipeCompiler compiler = new RecipeCompiler();
+    List<Directive> directives = compiler.compile(recipe);
+    Assert.assertFalse(directives.isEmpty());
+}
+
+  @Test
   public void testBasic() throws Exception {
     String[] recipe = new String[] {
       "#pragma version 2.0;",
